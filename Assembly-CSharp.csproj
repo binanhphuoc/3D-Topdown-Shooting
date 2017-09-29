@@ -84,6 +84,12 @@
      <Compile Include="Assets\_Complete-Game\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\_Complete-Game\Scripts\Player\PlayerShooting.cs" />
      <Compile Include="Assets\_Complete-Game\Scripts\Player\TrailCollider.cs" />
+     <Compile Include="Assets\DarkTonic\PoolBoss\ExampleScene\Scripts\PB_Instructions.cs" />
+     <Compile Include="Assets\DarkTonic\PoolBoss\ExampleScene\Scripts\PB_Rotate.cs" />
+     <Compile Include="Assets\DarkTonic\PoolBoss\Scripts\PoolBoss.cs" />
+     <Compile Include="Assets\DarkTonic\PoolBoss\Scripts\PoolBossCategory.cs" />
+     <Compile Include="Assets\DarkTonic\PoolBoss\Scripts\PoolBossItem.cs" />
+     <Compile Include="Assets\DarkTonic\PoolBoss\Scripts\TimedDespawner.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -174,6 +180,7 @@
      <None Include="Assets\PostProcessing\Resources\Shaders\DiskKernels.cginc" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.cginc" />
      <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceRaytrace.cginc" />
+     <None Include="Assets\DarkTonic\PoolBoss\ReleaseNotes.txt" />
      <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.shader" />
      <None Include="Assets\PostProcessing\Editor Resources\Monitors\VectorscopeRender.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\EyeAdaptation.shader" />

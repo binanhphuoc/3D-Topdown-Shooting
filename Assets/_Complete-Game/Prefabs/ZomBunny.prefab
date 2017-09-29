@@ -353,7 +353,7 @@ MonoBehaviour:
   attackDamage: 10
   originPrefab: {fileID: 1548652471379462, guid: 8182cf65b5f7f4e169096f14f4ede6ef,
     type: 2}
-  trailPrefab: {fileID: 1347080143175358, guid: 756ef02aee62742ec85c0782c0b91eb6,
+  trailPrefab: {fileID: 4417116429039944, guid: 756ef02aee62742ec85c0782c0b91eb6,
     type: 2}
 --- !u!114 &11400006
 MonoBehaviour:

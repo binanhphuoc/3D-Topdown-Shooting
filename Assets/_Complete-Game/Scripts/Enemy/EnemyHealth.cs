@@ -72,6 +72,8 @@ namespace CompleteProject
             // If the current health is less than or equal to zero...
             if(currentHealth <= 0)
             {
+				// Destroy all trail collider
+				gameObject.GetComponent<EnemyAttack>().destroyOrigin();
                 // ... the enemy is dead.
                 Death ();
             }
@@ -89,8 +91,6 @@ namespace CompleteProject
             // Tell the animator that the enemy is dead.
             anim.SetTrigger ("Dead");
 
-			// Destroy all trail collider
-			gameObject.GetComponent<EnemyAttack>().destroyOrigin();
 
             // Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
             enemyAudio.clip = deathClip;
@@ -111,6 +111,8 @@ namespace CompleteProject
 
             // Increase the score by the enemy's score value.
             ScoreManager.score += scoreValue;
+
+
 
             // After 2 seconds destory the enemy.
             Destroy (gameObject, 2f);

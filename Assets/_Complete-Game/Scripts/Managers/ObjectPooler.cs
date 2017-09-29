@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CompleteProject{
 
-	public enum poolEntity{TRAIL, MONSTER};
+	public enum poolEntity{TRAIL, ORIGIN};
 
 	[System.Serializable]
 	public class Pool
@@ -41,72 +41,156 @@ namespace CompleteProject{
 			
 	}
 
+	public class PoolMonoBehaviour : MonoBehaviour
+	{
+
+		virtual public void OnEnabled() { }
+	}
+
 	public class ObjectPooler : MonoBehaviour {
 
 		public static ObjectPooler SharedInstance;
 		public Pool[] pool;
-		GameObject holder;
+		public GameObject holder;
 
 		void Awake()
 		{
 			SharedInstance = this;
 			holder = new GameObject ();
-		}
-
-		void Start()
-		{
-			for (int i = 0; i < pool.Length; i++) {
-				for (int j = 0; j < pool[i].pooledAmount; j++) {
+			//Debug.Log(string.Format("poolLength {0}", pool.Length));
+			for (int i = 0; i<pool.Length; i++)
+			{
+				for (int j = 0; j<pool[i].pooledAmount; j++)
+				{
 					GameObject obj = (GameObject)Instantiate(pool[i].pooledObject);
-					obj.SetActive(false); 
+					obj.SetActive(false);
 					obj.transform.SetParent(holder.transform);
 					pool[i].add(obj);
 				}
+				//Debug.Log(pool[i].count());
+			}
+		}
+		/*
+		void Start()
+		{
+			Debug.Log(string.Format("poolLength {0}", pool.Length));
+			for (int i = 0; i < pool.Length; i++)
+			{
+				for (int j = 0; j < pool[i].pooledAmount; j++)
+				{
+					GameObject obj = (GameObject)Instantiate(pool[i].pooledObject);
+					obj.SetActive(false);
+					obj.transform.SetParent(holder.transform);
+					pool[i].add(obj);
+				}
+				Debug.Log(pool[i].count());
 			}
 
+		}*/
+
+		public void setActive(GameObject obj, bool b)
+		{
+			//foreach (Behaviour childCompnent in obj.GetComponentsInChildren<Behaviour>())
+             	//childCompnent.enabled = b;
+			obj.SetActive(b);
+			if (b == true && obj.GetComponent<PoolMonoBehaviour>())
+				obj.GetComponent<PoolMonoBehaviour>().OnEnabled();
 		}
 
-		public GameObject GetPooledObject(poolEntity p) {
+		public GameObject GetPooledObject(poolEntity p, Vector3 position, Quaternion rotation, GameObject parent) {
 			//1
 			int type = (int) p;
 			for (int i = 0; i < pool[type].count(); i++) {
 				//2
 				if (!pool[type].active(i)) {
-					pool [type].obj (i).SetActive (true);
+					//setActive(pool [type].obj (i),true);
+					pool[type].obj(i).transform.position = position;
+					pool[type].obj(i).transform.rotation = rotation;
+					if (parent != null)
+						pool[type].obj(i).transform.SetParent(parent.transform);
 					return pool[type].obj(i);
 				}
 			}
 			//3   
 			if (pool[type].willGrow) {
 				GameObject obj = (GameObject)Instantiate (pool[type].pooledObject);
+                //setActive(obj,true);
 				pool[type].add (obj);
+				obj.transform.position = position;
+				obj.transform.rotation = rotation;
+				if (parent != null)
+					obj.transform.SetParent(parent.transform);
 				return obj;
 			}
 
 			return null;
 		}
 
-		public IEnumerator destroyObject(GameObject obj, float time = 0f)
+		public GameObject GetPooledObject(poolEntity p)
 		{
-			if (time > 0)
-				yield return new WaitForSeconds (time);
+			//1
+			int type = (int)p;
+			//Debug.Log(string.Format("type {0}", type));
+			for (int i = 0; i < pool[type].count(); i++)
+			{
+				//2
+				if (!pool[type].active(i))
+				{
+					//setActive(pool [type].obj (i),true);
+					pool[type].obj(i).transform.position = new Vector3();
+					pool[type].obj(i).transform.rotation = new Quaternion();
+					return pool[type].obj(i);
+				}
+			}
+			//3   
+			if (pool[type].willGrow)
+			{
+				GameObject obj = (GameObject)Instantiate(pool[type].pooledObject);
+				//setActive(obj,true);
+				obj.transform.position = new Vector3();
+				obj.transform.rotation = new Quaternion();
+				pool[type].add(obj);
+				return obj;
+			}
 
+			return null;
+		}
+
+		public void destroyObject(GameObject obj)
+		{
+			//if (time > 0)
+			//	StartCoroutine(timer(time));
 			/*for (int i = 0; i < obj.transform.childCount; i++) {
 				obj.transform.GetChild(i).gameObject.SetActive(false);
 			};*/
-			obj.transform.parent = null;
+			//obj.transform.parent = null;
 			obj.transform.SetParent(holder.transform);
-			obj.SetActive (false);
+			setActive(obj, false);
+			//Debug.Log(obj.activeInHierarchy);
+
+		}
+
+		IEnumerator timer(float time)
+		{
+			yield return new WaitForSeconds(time);
 		}
 
 		public void destroyChildren(GameObject obj)
 		{
-			for (int i = 0; i < obj.transform.childCount; i++) {
+			while(obj.transform.childCount > 0)
+			{
 				//obj.transform.GetChild (i).gameObject.SetActive (false);
-				//destroyObject (obj.transform.GetChild (i).gameObject);
-				destroyObject(obj.transform.GetChild(i).gameObject);
+				//destroyObject (obj.transform.GetChild(i).gameObject);
+				//obj.transform.SetParent(holder.transform);
+				//setActive(obj
+				Transform o = obj.transform.GetChild(0);
+				setActive(o.gameObject, false);
+				//Debug.Log(o.gameObject.activeInHierarchy);
+				o.transform.SetParent(holder.transform);
 			}
+			//Debug.Log(obj.transform.childCount);
 			//obj.transform.DetachChildren ();
+
 		}
 
 	}

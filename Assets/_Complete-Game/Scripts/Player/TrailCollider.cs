@@ -1,21 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DarkTonic.PoolBoss;
 
 namespace CompleteProject
 {
-	public class TrailCollider : MonoBehaviour {
+	public class TrailCollider : PoolMonoBehaviour {
 
 		public GameObject thisMoster;
 		TrailRenderer thisMonsterTrail;
 		bool isInTrigger = false;
+		float timer;
 		public GameObject particles;
 
 		// Use this for initialization
 		void Start () {
-			thisMonsterTrail = thisMoster.GetComponentInChildren<TrailRenderer> ();
+			//thisMonsterTrail = thisMoster.GetComponentInChildren<TrailRenderer> ();
 			//timer = thisMonsterTrail.time;
-			ObjectPooler.SharedInstance.destroyObject (gameObject, thisMonsterTrail.time - 0.2f);
+            //StartCoroutine(timer(thisMonsterTrail.time - 0.2f));
+			//ObjectPooler.SharedInstance.destroyObject(gameObject, thisMonsterTrail.time - 0.2f);
 			/*
 			var main = gameObject.transform.GetChild (1).GetComponent<ParticleSystem> ().main;
 			main.startColor = thisMonsterTrail.startColor;*/
@@ -23,6 +26,15 @@ namespace CompleteProject
 		
 		// Update is called once per frame
 		void Update () {
+			timer -= Time.deltaTime;
+			if (timer <= 0 && gameObject.activeInHierarchy)
+				ObjectPooler.SharedInstance.destroyObject(gameObject);
+		}
+
+		override public void OnEnabled()
+		{
+			thisMonsterTrail = thisMoster.GetComponentInChildren<TrailRenderer> ();
+			timer = thisMonsterTrail.time - 0.2f;
 		}
 
 		void OnTriggerStay(Collider other)

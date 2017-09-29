@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+//using DarkTonic.PoolBoss;
 
 namespace CompleteProject
 {
@@ -18,7 +19,7 @@ namespace CompleteProject
 		//int trailCount = 0;							// Current number of trail colliders in contact with player
 		GameObject trailOrigin;
 		public GameObject originPrefab;
-		public GameObject trailPrefab;				// Prefab to spawn trail
+		public Transform trailPrefab;				// Prefab to spawn trail
 
         void Awake ()
         {
@@ -27,19 +28,25 @@ namespace CompleteProject
             playerHealth = player.GetComponent <PlayerHealth> ();
             enemyHealth = GetComponent<EnemyHealth>();
             anim = GetComponent <Animator> ();
-			trailOrigin = Instantiate (originPrefab);
-			InvokeRepeating ("trailSpawn", 0.5f, 0.1f);
+
         }
+
+		void Start()
+		{
+			trailOrigin = ObjectPooler.SharedInstance.GetPooledObject(poolEntity.ORIGIN);
+			//Debug.Log(trailOrigin);
+			ObjectPooler.SharedInstance.setActive(trailOrigin, true);
+            InvokeRepeating("trailSpawn", 0.5f, 0.1f);
+		}
 
 		void trailSpawn()
 		{
-			GameObject newTrail = ObjectPooler.SharedInstance.GetPooledObject (poolEntity.TRAIL);
-			Vector3 v = gameObject.transform.position;
-			newTrail.transform.position = v;
-			Quaternion q = gameObject.transform.rotation;
-			newTrail.transform.rotation = q;
-			newTrail.transform.SetParent (trailOrigin.transform);
-			newTrail.GetComponent<TrailCollider> ().thisMoster = gameObject;
+			//Transform newTrail = PoolBoss.Spawn(trailPrefab, gameObject.transform.position, gameObject.transform.rotation, trailOrigin.transform);
+			GameObject newTrail = ObjectPooler.SharedInstance.GetPooledObject(poolEntity.TRAIL,
+																			  gameObject.transform.position,
+			                                                                  gameObject.transform.rotation, trailOrigin);
+			newTrail.gameObject.GetComponent<TrailCollider> ().thisMoster = gameObject;
+			ObjectPooler.SharedInstance.setActive(newTrail, true);
 		}
 
         void OnTriggerEnter (Collider other)
@@ -108,16 +115,12 @@ namespace CompleteProject
 		public void destroyOrigin()
 		{
 			CancelInvoke ();
-	/*		for (int i = 0; i < trailOrigin.transform.childCount; i++) {
-				if (trailOrigin.transform.GetChild (i).GetComponent<TrailCollider> ().inTrigger())
-					trailCount--;
-			}*/
 			//Debug.Log (trailOrigin.transform.childCount);
 			//Debug.Log(trailOrigin.transform.childCount);
 			ObjectPooler.SharedInstance.destroyChildren(trailOrigin);
 			//trailOrigin.transform.DetachChildren();
 			//Debug.Log(trailOrigin.transform.childCount);
-			Destroy (trailOrigin);
+			ObjectPooler.SharedInstance.destroyObject (trailOrigin);
 		}
 
 		public float getTimer()

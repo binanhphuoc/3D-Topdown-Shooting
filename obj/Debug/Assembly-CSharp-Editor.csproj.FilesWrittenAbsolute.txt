@@ -40,3 +40,6 @@
 /Users/phuocdo/Documents/Computer Science/Unity/Nightmares/Temp/bin/Debug/Unity.CecilTools.dll
 /Users/phuocdo/Documents/Computer Science/Unity/Nightmares/Temp/bin/Debug/Mono.Cecil.Pdb.dll
 /Users/phuocdo/Documents/Computer Science/Unity/Nightmares/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/phuocdo/Documents/Computer Science/Unity/Nightmares/Temp/bin/Debug/Assembly-CSharp-Editor.pdb
+/Users/phuocdo/Documents/Computer Science/Unity/Nightmares/obj/Debug/Assembly-CSharp-Editor.pdb
+/Users/phuocdo/Documents/Computer Science/Unity/Nightmares/Temp/bin/Debug/Assembly-CSharp.pdb
