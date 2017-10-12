@@ -21,6 +21,9 @@ namespace CompleteProject{
 		{
 			// Do not remove this line
 			timer = timeEffect;
+			if (current != null && current != this.gameObject)
+				ObjectPooler.SharedInstance.destroyObject(current);
+			current = this.gameObject;
 
 			// Write your code here
 			player.GetComponent<PlayerMovement>().setInverse (true);
@@ -41,6 +44,7 @@ namespace CompleteProject{
 		public AidEnum type = AidEnum.PoisonousMushroom;
 
 		static float timer;
+		static GameObject current;
 		override public void updateTimer()
 		{
 			timer -= Time.deltaTime;

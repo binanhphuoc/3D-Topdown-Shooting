@@ -20,7 +20,11 @@ namespace CompleteProject
 			// Boilerplate
 			// Do not remove this line
 			timer = timeEffect;
+			if (current != null && current != this.gameObject)
+				ObjectPooler.SharedInstance.destroyObject(current);
+			current = this.gameObject;
 
+			// Your code goes here
 			PlayerShooting ps = player.transform.GetChild (2).gameObject.GetComponent<PlayerShooting> ();
 			// Write your code here
 			if (ps.damagePerShot == ps.getBasicDamage ()) {
@@ -55,6 +59,7 @@ namespace CompleteProject
 		// Boilerplate section
 		// Do NOT modify
 		static float timer;
+		static GameObject current;
 		override public void updateTimer()
 		{
 			timer -= Time.deltaTime;

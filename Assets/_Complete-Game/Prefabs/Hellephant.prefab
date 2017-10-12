@@ -83,13 +83,14 @@ GameObject:
   - component: {fileID: 11487314}
   - component: {fileID: 11402556}
   - component: {fileID: 11415352}
+  - component: {fileID: 114826765223640698}
   m_Layer: 9
   m_Name: Hellephant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &184534
 GameObject:
   m_ObjectHideFlags: 0
@@ -7229,3 +7230,15 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
+--- !u!114 &114826765223640698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744c85c54a33948149f7fb28d04856e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4

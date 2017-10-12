@@ -22,13 +22,14 @@ GameObject:
   - component: {fileID: 136642502644946258}
   - component: {fileID: 114632522012158846}
   - component: {fileID: 114179088968741828}
+  - component: {fileID: 114051415733157358}
   m_Layer: 0
   m_Name: SuperBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1252053553171228
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,24 +175,22 @@ Light:
   m_Lightmapping: 2
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114051415733157358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1152800147140500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744c85c54a33948149f7fb28d04856e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 7
 --- !u!114 &114179088968741828
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,7 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeDestroy: 20
   flashTime: 5
-  timeEffect: 15
+  timeEffect: 3
   flashColor: {r: 1, g: 0.80689657, b: 0, a: 0.253}
   multiplier: 10
   type: 1

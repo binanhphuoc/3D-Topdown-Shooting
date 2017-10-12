@@ -1,14 +1,18 @@
-﻿<Properties StartupConfiguration="{2B2CEF85-F06E-DCD9-FA2E-A4905B19F945}|Unit Tests">
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Complete-Game/Scripts/Managers/ObjectPooler.cs">
+﻿<Properties StartupConfiguration="{4E4483EA-6C1D-D9AD-6538-786E9E195E2E}|Unit Tests">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/_Complete-Game/Scripts/Aids/DoubleDamage.cs">
     <Files>
-      <File FileName="Assets/_Complete-Game/Scripts/Enemy/EnemyAttack.cs" Line="37" Column="6" />
-      <File FileName="Assets/_Complete-Game/Scripts/Aids/AidDisplayBar.cs" Line="105" Column="5" />
-      <File FileName="Assets/_Complete-Game/Scripts/Managers/ObjectPooler.cs" Line="70" Column="7" />
-      <File FileName="Assets/_Complete-Game/Scripts/Player/TrailCollider.cs" Line="57" Column="6" />
-      <File FileName="Assets/_Complete-Game/Scripts/Managers/EnemyManager.cs" Line="33" Column="13" />
-      <File FileName="Assets/_Complete-Game/Scripts/Enemy/EnemyHealth.cs" Line="76" Column="5" />
-      <File FileName="Assets/_Complete-Game/Scripts/Player/PlayerShooting.cs" Line="212" Column="7" />
+      <File FileName="Assets/_Complete-Game/Scripts/Managers/ObjectPooler.cs" Line="54" Column="12" />
+      <File FileName="Assets/_Complete-Game/Scripts/Managers/PoolTag.cs" Line="11" Column="3" />
+      <File FileName="Assets/_Complete-Game/Scripts/Managers/PoolStatic.cs" Line="17" Column="1" />
+      <File FileName="Assets/_Complete-Game/Scripts/Enemy/EnemyMovement.cs" Line="28" Column="8" />
+      <File FileName="Assets/_Complete-Game/Scripts/Helpers/VolumeHandler.cs" Line="18" Column="3" />
+      <File FileName="Assets/_Complete-Game/Scripts/Aids/DoubleDamage.cs" Line="14" Column="4" />
+      <File FileName="Assets/_Complete-Game/Scripts/Aids/AidUISignal.cs" Line="25" Column="3" />
+      <File FileName="Assets/_Complete-Game/Scripts/Aids/HealthRecover.cs" Line="21" Column="15" />
+      <File FileName="Assets/_Complete-Game/Scripts/Aids/InverseMoving.cs" Line="27" Column="4" />
+      <File FileName="Assets/_Complete-Game/Scripts/Managers/AidManager.cs" Line="40" Column="6" />
+      <File FileName="Assets/_Complete-Game/Scripts/Enemy/EnemyHealth.cs" Line="28" Column="47" />
+      <File FileName="Assets/_Complete-Game/Scripts/Managers/ScoreManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
@@ -16,5 +20,6 @@
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp-Editor PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
 </Properties>

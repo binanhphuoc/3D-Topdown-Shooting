@@ -16,29 +16,39 @@ namespace CompleteProject
 
 		PlayerHealth playerHealth;
 
+		float timer;
+
 		void Awake()
 		{
 			player = GameObject.FindGameObjectWithTag ("Player");
 			playerHealth = player.GetComponent <PlayerHealth> ();
 /*			renderer = GetComponent<MeshRenderer> ();
 			col = GetComponent<Collider> ();*/
-			Destroy (gameObject, existTime);
+		}
+
+		void OnEnable()
+		{
+			timer = existTime;
 		}
 
 		void Update()
 		{
-			
+			timer -= Time.deltaTime;
+			if (timer <= 0)
+				ObjectPooler.SharedInstance.destroyObject(gameObject);
 		}
 
 		void OnTriggerEnter(Collider other)
 		{
+			if (!gameObject.activeInHierarchy)
+				return;
 			if (playerHealth.currentHealth >= playerHealth.startingHealth)
 				return;
 			if (other.gameObject == player) {
 				playerHealth.recover (healthGain);
 			/*	renderer.enabled = false;
 				col.enabled = false;*/
-				Destroy (gameObject);
+				ObjectPooler.SharedInstance.destroyObject (gameObject);
 			}
 		}
 

@@ -75,8 +75,11 @@
      <Compile Include="Assets\_Complete-Game\Scripts\Managers\AidManager.cs" />
      <Compile Include="Assets\_Complete-Game\Scripts\Managers\EnemyManager.cs" />
      <Compile Include="Assets\_Complete-Game\Scripts\Managers\GameOverManager.cs" />
+     <Compile Include="Assets\_Complete-Game\Scripts\Managers\HighScoreManager.cs" />
      <Compile Include="Assets\_Complete-Game\Scripts\Managers\ObjectPooler.cs" />
      <Compile Include="Assets\_Complete-Game\Scripts\Managers\PauseManager.cs" />
+     <Compile Include="Assets\_Complete-Game\Scripts\Managers\PoolStatic.cs" />
+     <Compile Include="Assets\_Complete-Game\Scripts\Managers\PoolTag.cs" />
      <Compile Include="Assets\_Complete-Game\Scripts\Managers\ScoreManager.cs" />
      <Compile Include="Assets\_Complete-Game\Scripts\Player\Gun.cs" />
      <Compile Include="Assets\_Complete-Game\Scripts\Player\NewBehaviourScript.cs" />

@@ -37,12 +37,15 @@ namespace CompleteProject
 			}
 
 			// Find a random index between zero and one less than the number of spawn points.
-			int spawnPointIndex = Random.Range (0, pointCount);
+			//int spawnPointIndex = Random.Range (0, pointCount);
+			int spawnPointIndex = Random.Range(1, 3);
 
 
 
 			// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
-			Instantiate (spawnObject, spawnPoints[spawnPointIndex].position, spawnObject.transform.rotation);
+			//Instantiate (spawnObject, spawnPoints[spawnPointIndex].position, spawnObject.transform.rotation);
+			GameObject go = ObjectPooler.SharedInstance.GetPooledObject(spawnObject.GetComponent<PoolTag>().type, spawnPoints[spawnPointIndex].position, spawnObject.transform.rotation);
+			ObjectPooler.SharedInstance.setActive(go, true);
 		}
 	}
 }

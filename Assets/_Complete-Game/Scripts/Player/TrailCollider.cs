@@ -5,7 +5,7 @@ using DarkTonic.PoolBoss;
 
 namespace CompleteProject
 {
-	public class TrailCollider : PoolMonoBehaviour {
+	public class TrailCollider : MonoBehaviour {
 
 		public GameObject thisMoster;
 		TrailRenderer thisMonsterTrail;
@@ -17,7 +17,7 @@ namespace CompleteProject
 		void Start () {
 			//thisMonsterTrail = thisMoster.GetComponentInChildren<TrailRenderer> ();
 			//timer = thisMonsterTrail.time;
-            //StartCoroutine(timer(thisMonsterTrail.time - 0.2f));
+			//StartCoroutine(timer(thisMonsterTrail.time - 0.2f));
 			//ObjectPooler.SharedInstance.destroyObject(gameObject, thisMonsterTrail.time - 0.2f);
 			/*
 			var main = gameObject.transform.GetChild (1).GetComponent<ParticleSystem> ().main;
@@ -25,13 +25,13 @@ namespace CompleteProject
 		}
 		
 		// Update is called once per frame
-		void Update () {
+		void Update() {
 			timer -= Time.deltaTime;
 			if (timer <= 0 && gameObject.activeInHierarchy)
 				ObjectPooler.SharedInstance.destroyObject(gameObject);
 		}
 
-		override public void OnEnabled()
+		void OnEnable()
 		{
 			thisMonsterTrail = thisMoster.GetComponentInChildren<TrailRenderer> ();
 			timer = thisMonsterTrail.time - 0.2f;

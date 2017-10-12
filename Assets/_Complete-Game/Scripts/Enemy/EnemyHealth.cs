@@ -16,9 +16,11 @@ namespace CompleteProject
         AudioSource enemyAudio;                     // Reference to the audio source.
         ParticleSystem hitParticles;                // Reference to the particle system that plays when the enemy is damaged.
         CapsuleCollider capsuleCollider;            // Reference to the capsule collider.
+		TrailRenderer trail;
         bool isDead;                                // Whether the enemy is dead.
         bool isSinking;                             // Whether the enemy has started sinking through the floor.
-
+		float timer = 2f;
+		float trailWidth;
 
         void Awake ()
         {
@@ -30,10 +32,23 @@ namespace CompleteProject
 
             // Setting the current health when the enemy first spawns.
             currentHealth = startingHealth;
+			trail = gameObject.GetComponentInChildren<TrailRenderer>();
+			trailWidth = trail.widthMultiplier;
         }
 
+		void OnEnable()
+		{
+			// Setting the current health when the enemy first spawns.
+			trail.widthMultiplier = trailWidth;
+			trail.enabled = true;
+            currentHealth = startingHealth;
+			capsuleCollider.isTrigger = false;
+			isSinking = false;
+			isDead = false;
+			timer = 2f;
+		}
 
-        void Update ()
+		void Update ()
         {
             // If the enemy should be sinking...
             if(isSinking)
@@ -42,10 +57,17 @@ namespace CompleteProject
                 transform.Translate (-Vector3.up * sinkSpeed * Time.deltaTime);
 
 				// Fade trail
-				if (gameObject.GetComponentInChildren<TrailRenderer> ().widthMultiplier > 0)
-					gameObject.GetComponentInChildren<TrailRenderer> ().widthMultiplier -= (fadeSpeed / 0.4f) * Time.deltaTime;
+				if (trail.widthMultiplier > 0)
+					trail.widthMultiplier -= (fadeSpeed / 0.4f) * Time.deltaTime;
 				else
-					gameObject.GetComponentInChildren<TrailRenderer> ().enabled = false;
+				{
+					trail.enabled = false;
+					trail.Clear();
+				}
+				
+				timer -= Time.deltaTime;
+				if (timer <= 0 && gameObject.activeInHierarchy)
+					ObjectPooler.SharedInstance.destroyObject(gameObject);
             }
         }
 
@@ -72,8 +94,7 @@ namespace CompleteProject
             // If the current health is less than or equal to zero...
             if(currentHealth <= 0)
             {
-				// Destroy all trail collider
-				gameObject.GetComponent<EnemyAttack>().destroyOrigin();
+				
                 // ... the enemy is dead.
                 Death ();
             }
@@ -95,11 +116,16 @@ namespace CompleteProject
             // Change the audio clip of the audio source to the death clip and play it (this will stop the hurt clip playing).
             enemyAudio.clip = deathClip;
             enemyAudio.Play ();
-        }
 
+			// Destroy all trail collider
+			gameObject.GetComponent<EnemyAttack>().destroyOrigin();
+
+			StartSinking();
+        }
 
         public void StartSinking ()
         {
+
             // Find and disable the Nav Mesh Agent.
             GetComponent <UnityEngine.AI.NavMeshAgent> ().enabled = false;
 
@@ -114,8 +140,8 @@ namespace CompleteProject
 
 
 
-            // After 2 seconds destory the enemy.
-            Destroy (gameObject, 2f);
+			// After 2 seconds destory the enemy.
+			//Destroy (gameObject, 2f);
         }
     }
 }

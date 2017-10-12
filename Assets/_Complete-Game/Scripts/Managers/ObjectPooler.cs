@@ -4,49 +4,6 @@ using UnityEngine;
 
 namespace CompleteProject{
 
-	public enum poolEntity{TRAIL, ORIGIN};
-
-	[System.Serializable]
-	public class Pool
-	{
-		public GameObject pooledObject;
-		public int pooledAmount;
-		public bool willGrow;
-		private List<GameObject> pooledList;
-
-		public Pool()
-		{
-			pooledList = new List<GameObject>();
-		}
-
-		public void add(GameObject obj)
-		{
-			pooledList.Add (obj);
-		}
-
-		public int count()
-		{
-			return pooledList.Count;
-		}
-
-		public bool active(int pos)
-		{
-			return pooledList [pos].activeInHierarchy;
-		}
-
-		public GameObject obj(int pos)
-		{
-			return pooledList [pos];
-		}
-			
-	}
-
-	public class PoolMonoBehaviour : MonoBehaviour
-	{
-
-		virtual public void OnEnabled() { }
-	}
-
 	public class ObjectPooler : MonoBehaviour {
 
 		public static ObjectPooler SharedInstance;
@@ -58,15 +15,16 @@ namespace CompleteProject{
 			SharedInstance = this;
 			holder = new GameObject ();
 			//Debug.Log(string.Format("poolLength {0}", pool.Length));
-			for (int i = 0; i<pool.Length; i++)
+			for (int i = 0; i< pool.Length; i++)
 			{
 				for (int j = 0; j<pool[i].pooledAmount; j++)
 				{
-					GameObject obj = (GameObject)Instantiate(pool[i].pooledObject);
+					GameObject obj = Instantiate(pool[i].pooledObject);
 					obj.SetActive(false);
 					obj.transform.SetParent(holder.transform);
 					pool[i].add(obj);
 				}
+
 				//Debug.Log(pool[i].count());
 			}
 		}
@@ -91,13 +49,22 @@ namespace CompleteProject{
 		public void setActive(GameObject obj, bool b)
 		{
 			//foreach (Behaviour childCompnent in obj.GetComponentsInChildren<Behaviour>())
-             	//childCompnent.enabled = b;
+			//childCompnent.enabled = b;
+			if (obj == null)
+				return;
 			obj.SetActive(b);
-			if (b == true && obj.GetComponent<PoolMonoBehaviour>())
-				obj.GetComponent<PoolMonoBehaviour>().OnEnabled();
+			/*
+			if (b == true)
+			{
+				PoolMonoBehaviour pmb = obj.GetComponent<PoolMonoBehaviour>();
+				if (pmb != null)
+					pmb.OnEnabled();
+			}
+			*/
 		}
 
-		public GameObject GetPooledObject(poolEntity p, Vector3 position, Quaternion rotation, GameObject parent) {
+		/*
+		public GameObject GetPooledObject(poolEntity p, Vector3 position, Quaternion rotation, GameObject parent = null) {
 			//1
 			int type = (int) p;
 			for (int i = 0; i < pool[type].count(); i++) {
@@ -156,6 +123,67 @@ namespace CompleteProject{
 			return null;
 		}
 
+		*/
+
+		public GameObject GetPooledObject(poolEntity p, Vector3 position, Quaternion rotation, GameObject parent = null)
+		{
+			//1
+			int type = (int)p;
+
+				//setActive(pool [type].obj (i),true);
+			GameObject go = pool[type].pop();
+			if (go != null)
+			{
+				go.transform.position = position;
+				go.transform.rotation = rotation;
+				if (parent != null)
+					go.transform.SetParent(parent.transform);
+				return go;
+			}
+
+			//3   
+			if (pool[type].willGrow)
+			{
+				GameObject obj = (GameObject)Instantiate(pool[type].pooledObject);
+				//setActive(obj,true);
+				pool[type].add(obj);
+				obj = pool[type].pop(obj);
+				obj.transform.position = position;
+				obj.transform.rotation = rotation;
+				if (parent != null)
+					obj.transform.SetParent(parent.transform);
+				return obj;
+			}
+
+			return null;
+		}
+
+		public GameObject GetPooledObject(poolEntity p)
+		{
+			//1
+			int type = (int)p;
+
+			//setActive(pool [type].obj (i),true);
+			GameObject go = pool[type].pop();
+			if (go != null)
+			{
+				return go;
+			}
+
+			//3   
+			if (pool[type].willGrow)
+			{
+				GameObject obj = Instantiate(pool[type].pooledObject);
+				//setActive(obj,true);
+				pool[type].add(obj);
+				obj = pool[type].pop(obj);
+
+				return obj;
+			}
+
+			return null;
+		}
+
 		public void destroyObject(GameObject obj)
 		{
 			//if (time > 0)
@@ -164,6 +192,9 @@ namespace CompleteProject{
 				obj.transform.GetChild(i).gameObject.SetActive(false);
 			};*/
 			//obj.transform.parent = null;
+
+			int type = (int) obj.GetComponent<PoolTag>().type;
+			pool[type].push(obj);
 			obj.transform.SetParent(holder.transform);
 			setActive(obj, false);
 			//Debug.Log(obj.activeInHierarchy);
@@ -177,6 +208,7 @@ namespace CompleteProject{
 
 		public void destroyChildren(GameObject obj)
 		{
+			//Debug.Log(obj);
 			while(obj.transform.childCount > 0)
 			{
 				//obj.transform.GetChild (i).gameObject.SetActive (false);

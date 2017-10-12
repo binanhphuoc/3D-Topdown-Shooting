@@ -66,7 +66,7 @@ namespace CompleteProject
 			{
 			//Debug.Log(Input.mousePosition);
 			// ... shoot the gun.
-			Shoot ();
+				Shoot ();
 			}
 
             // If there is input on the shoot direction stick and it's time to fire...

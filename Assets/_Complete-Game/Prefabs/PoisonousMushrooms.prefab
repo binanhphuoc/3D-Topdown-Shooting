@@ -26,13 +26,14 @@ GameObject:
   - component: {fileID: 136221115008908322}
   - component: {fileID: 222261791206406198}
   - component: {fileID: 114572153058909216}
+  - component: {fileID: 114839484287518162}
   m_Layer: 0
   m_Name: PoisonousMushrooms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1260377518988792
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,20 +164,6 @@ Light:
   m_Lightmapping: 2
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -239,6 +226,18 @@ MonoBehaviour:
   timeEffect: 15
   flashColor: {r: 0.5159232, g: 0.051470578, b: 1, a: 0.266}
   type: 0
+--- !u!114 &114839484287518162
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1142870315730232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744c85c54a33948149f7fb28d04856e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 6
 --- !u!136 &136221115008908322
 CapsuleCollider:
   m_ObjectHideFlags: 1

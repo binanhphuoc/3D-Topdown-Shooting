@@ -20,8 +20,12 @@ namespace CompleteProject
             nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
         }
 
+		void OnEnable()
+		{
+			nav.enabled = true;
+		}
 
-        void Update ()
+		void Update ()
         {
             // If the enemy and the player have health left...
             if(enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)

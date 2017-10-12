@@ -93,7 +93,7 @@ namespace CompleteProject{
 				
 				return;
 			}
-			Debug.Log (position);
+			//Debug.Log (position);
 			mapback [position] = -1;
 
 

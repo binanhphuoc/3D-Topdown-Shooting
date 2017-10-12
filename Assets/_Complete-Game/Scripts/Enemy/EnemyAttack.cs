@@ -31,12 +31,17 @@ namespace CompleteProject
 
         }
 
-		void Start()
+		void OnEnable()
 		{
 			trailOrigin = ObjectPooler.SharedInstance.GetPooledObject(poolEntity.ORIGIN);
-			//Debug.Log(trailOrigin);
+			Debug.Log(trailOrigin);
 			ObjectPooler.SharedInstance.setActive(trailOrigin, true);
             InvokeRepeating("trailSpawn", 0.5f, 0.1f);
+		}
+
+		void OnDisable()
+		{
+			CancelInvoke();
 		}
 
 		void trailSpawn()
@@ -71,7 +76,7 @@ namespace CompleteProject
         }
 
 
-        void Update ()
+		void Update ()
         {
             // Add the time since Update was last called to the timer.
             timer += Time.deltaTime;
@@ -117,6 +122,7 @@ namespace CompleteProject
 			CancelInvoke ();
 			//Debug.Log (trailOrigin.transform.childCount);
 			//Debug.Log(trailOrigin.transform.childCount);
+			//Debug.Log(trailOrigin);
 			ObjectPooler.SharedInstance.destroyChildren(trailOrigin);
 			//trailOrigin.transform.DetachChildren();
 			//Debug.Log(trailOrigin.transform.childCount);

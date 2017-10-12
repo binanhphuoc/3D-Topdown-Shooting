@@ -22,13 +22,14 @@ GameObject:
   - component: {fileID: 136293848356382694}
   - component: {fileID: 114043535828506052}
   - component: {fileID: 114452317498418370}
+  - component: {fileID: 114496725396432344}
   m_Layer: 0
   m_Name: Heart 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1547407677015114
 GameObject:
   m_ObjectHideFlags: 0
@@ -174,20 +175,6 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_FalloffTable:
-    m_Table[0]: 0
-    m_Table[1]: 0
-    m_Table[2]: 0
-    m_Table[3]: 0
-    m_Table[4]: 0
-    m_Table[5]: 0
-    m_Table[6]: 0
-    m_Table[7]: 0
-    m_Table[8]: 0
-    m_Table[9]: 0
-    m_Table[10]: 0
-    m_Table[11]: 0
-    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -220,6 +207,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthGain: 50
   existTime: 20
+--- !u!114 &114496725396432344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1292868826388676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744c85c54a33948149f7fb28d04856e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 5
 --- !u!136 &136293848356382694
 CapsuleCollider:
   m_ObjectHideFlags: 1

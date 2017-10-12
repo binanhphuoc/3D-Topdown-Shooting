@@ -4,26 +4,29 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace CompleteProject{
+
+	/// <summary>
+	/// This is a template to create a mystery-box item that requires countdown time display.
+	/// Do NOT modify the code in this file.
+	/// Instead, inherit your class form AidUISignal.
+	/// </summary>
+
 	public abstract class AidUISignal : MonoBehaviour {
 
 		//protected GameObject player;
 		private AidDisplayBar displayBar;
 		//private Sprite image;
 		public float timeDestroy;
+		float startTime;
 		public float flashTime = 5f;
 		public float timeEffect;
 		public Color flashColor;
 		private bool isEntered = false;
 
-		/*
-		public delegate void Delegate();
-		protected Delegate triggerEnter;
-		protected Delegate disableEffect;
-		*/
-
 		public virtual void triggerEnter(){}
 		public virtual void disableEffect(){}
 		public virtual void onAwake(){}
+		public virtual void onEnabled() { }
 
 		//These methods are required
 		public abstract void updateTimer();				// Update timer for each type of aid
@@ -39,25 +42,46 @@ namespace CompleteProject{
 
 			//This line is the problem
 			//image = gameObject.GetComponent<Image> ().sprite;
+			startTime = timeDestroy;
 			onAwake ();
 		}
 
+		void OnEnable()
+		{
+			timeDestroy = startTime;
+			isEntered = false;
+			if (gameObject.GetComponent<MeshRenderer> ()) {
+				gameObject.GetComponent<MeshRenderer> ().enabled = true;
+			}
+			gameObject.GetComponent<CapsuleCollider> ().enabled = true;
+			for (int i = 0; i<gameObject.transform.childCount; i++) {
+				gameObject.transform.GetChild (i).gameObject.SetActive (true);
+			}
+
+			onEnabled();
+		}
 
 		void Update(){
+			//Debug.Log(isEntered );
 			if (!isEntered) {
+				//Debug.Log(isEntered);
 				if (timeDestroy <= 0)
-					Destroy (gameObject);
+				{
+					ObjectPooler.SharedInstance.destroyObject(gameObject);
+				}
 				else
 					timeDestroy -= Time.deltaTime;
 			}
 			else {
 				if (sendTimer () <= 0) {
+					Debug.Log(isEntered);
 					// Do something with the character
 					displayBar.disableTimer(sendType());
 					disableEffect ();
-					Destroy (gameObject);
+					ObjectPooler.SharedInstance.destroyObject (gameObject);
 				} else {
 					updateTimer ();
+					//Debug.Log(sendTimer());
 					displayBar.setTimer (sendTimer () / timeEffect, sendType ());
 				}
 			}
@@ -81,6 +105,7 @@ namespace CompleteProject{
 				//player.GetComponent<PlayerHealth> ().inverse ();
 				//displayBar.setImage (image, sendType());
 				isEntered = true;
+				//Debug.Log(isEntered );
 				if (gameObject.GetComponent<MeshRenderer> ()) {
 					gameObject.GetComponent<MeshRenderer> ().enabled = false;
 				}
@@ -89,6 +114,7 @@ namespace CompleteProject{
 					gameObject.transform.GetChild (i).gameObject.SetActive (false);
 				}
 			}
+			Debug.Log(isEntered);
 		}
 	}
 }
