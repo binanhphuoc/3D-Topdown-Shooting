@@ -47,13 +47,19 @@ namespace CompleteProject
 					// ... attack.
 					//Debug.Log(trailCount);
 					ea.Attack ();
-					GameObject o = Instantiate (particles);
-					o.transform.Translate (gameObject.transform.position - o.transform.position);
+					//GameObject o = Instantiate (particles);
+					GameObject o = ObjectPooler.SharedInstance.GetPooledObject(poolEntity.FLAME, 
+					                                                           gameObject.transform.position);
+					if (o == null)
+						return;
+					ObjectPooler.SharedInstance.setActive(o, true);
+					//o.transform.Translate (gameObject.transform.position - o.transform.position);
+					//Debug.Log(o);
 					var main = o.transform.GetChild (1).GetComponent<ParticleSystem> ().main;
 					main.startColor = thisMonsterTrail.startColor;
 					o.transform.GetChild (0).GetComponent<ParticleSystem> ().Play();
 					o.transform.GetChild (1).GetComponent<ParticleSystem> ().Play();
-					Destroy (o, 1f);
+					ObjectPooler.SharedInstance.destroyObject (o, 1f);
 				}
 			}
 		

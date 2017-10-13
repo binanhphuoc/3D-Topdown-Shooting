@@ -219,7 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeDestroy: 20
   flashTime: 5
-  timeEffect: 3
+  timeEffect: 15
   flashColor: {r: 1, g: 0.80689657, b: 0, a: 0.253}
   multiplier: 10
   type: 1

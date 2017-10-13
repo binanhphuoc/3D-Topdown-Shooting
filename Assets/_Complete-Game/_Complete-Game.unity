@@ -3049,6 +3049,10 @@ MonoBehaviour:
       type: 2}
     pooledAmount: 5
     willGrow: 0
+  - pooledObject: {fileID: 1543020243758490, guid: 4df123eb447d345b8aa2d242b5270472,
+      type: 2}
+    pooledAmount: 3
+    willGrow: 0
   holder: {fileID: 0}
 --- !u!4 &766701963
 Transform:

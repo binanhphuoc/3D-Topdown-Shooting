@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4435483257083444}
+  - component: {fileID: 114367757913419406}
   m_Layer: 0
   m_Name: LavaParticles
   m_TagString: Untagged
@@ -101,6 +102,18 @@ Transform:
   m_Father: {fileID: 4435483257083444}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114367757913419406
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1543020243758490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 744c85c54a33948149f7fb28d04856e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 8
 --- !u!198 &198523453471083952
 ParticleSystem:
   m_ObjectHideFlags: 1

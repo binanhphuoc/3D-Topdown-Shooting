@@ -34,7 +34,6 @@ namespace CompleteProject
 		void OnEnable()
 		{
 			trailOrigin = ObjectPooler.SharedInstance.GetPooledObject(poolEntity.ORIGIN);
-			Debug.Log(trailOrigin);
 			ObjectPooler.SharedInstance.setActive(trailOrigin, true);
             InvokeRepeating("trailSpawn", 0.5f, 0.1f);
 		}

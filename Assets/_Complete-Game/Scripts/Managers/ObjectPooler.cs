@@ -125,7 +125,7 @@ namespace CompleteProject{
 
 		*/
 
-		public GameObject GetPooledObject(poolEntity p, Vector3 position, Quaternion rotation, GameObject parent = null)
+		public GameObject GetPooledObject(poolEntity p, Vector3 position, Quaternion? rotation = null, GameObject parent = null)
 		{
 			//1
 			int type = (int)p;
@@ -135,7 +135,8 @@ namespace CompleteProject{
 			if (go != null)
 			{
 				go.transform.position = position;
-				go.transform.rotation = rotation;
+				if (rotation != null)
+					go.transform.rotation = rotation.Value;
 				if (parent != null)
 					go.transform.SetParent(parent.transform);
 				return go;
@@ -149,7 +150,8 @@ namespace CompleteProject{
 				pool[type].add(obj);
 				obj = pool[type].pop(obj);
 				obj.transform.position = position;
-				obj.transform.rotation = rotation;
+				if (rotation != null)
+					obj.transform.rotation = rotation.Value;
 				if (parent != null)
 					obj.transform.SetParent(parent.transform);
 				return obj;
@@ -184,7 +186,7 @@ namespace CompleteProject{
 			return null;
 		}
 
-		public void destroyObject(GameObject obj)
+		public void destroyObject(GameObject obj, float waitTime = 0)
 		{
 			//if (time > 0)
 			//	StartCoroutine(timer(time));
@@ -193,17 +195,28 @@ namespace CompleteProject{
 			};*/
 			//obj.transform.parent = null;
 
-			int type = (int) obj.GetComponent<PoolTag>().type;
+			if (waitTime > 0)
+			{
+				StartCoroutine(WaitAndDestroy(obj, waitTime));
+			}
+			else
+			{
+				int type = (int)obj.GetComponent<PoolTag>().type;
+				pool[type].push(obj);
+				obj.transform.SetParent(holder.transform);
+				setActive(obj, false);
+				//Debug.Log(obj.activeInHierarchy);
+			}
+		}
+
+		private IEnumerator WaitAndDestroy(GameObject obj, float waitTime)
+		{
+			yield return new WaitForSeconds(waitTime);
+
+			int type = (int)obj.GetComponent<PoolTag>().type;
 			pool[type].push(obj);
 			obj.transform.SetParent(holder.transform);
 			setActive(obj, false);
-			//Debug.Log(obj.activeInHierarchy);
-
-		}
-
-		IEnumerator timer(float time)
-		{
-			yield return new WaitForSeconds(time);
 		}
 
 		public void destroyChildren(GameObject obj)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CompleteProject
 {
-	public enum poolEntity { TRAIL, ORIGIN, ZOMBUNNY, ZOMBEAR, HELLEPHANT, HEART, INVERSE, SUPERGUN };
+	public enum poolEntity { TRAIL, ORIGIN, ZOMBUNNY, ZOMBEAR, HELLEPHANT, HEART, INVERSE, SUPERGUN, FLAME };
 
 	[System.Serializable]
 	public class Pool

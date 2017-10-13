@@ -74,7 +74,6 @@ namespace CompleteProject{
 			}
 			else {
 				if (sendTimer () <= 0) {
-					Debug.Log(isEntered);
 					// Do something with the character
 					displayBar.disableTimer(sendType());
 					disableEffect ();
@@ -114,7 +113,6 @@ namespace CompleteProject{
 					gameObject.transform.GetChild (i).gameObject.SetActive (false);
 				}
 			}
-			Debug.Log(isEntered);
 		}
 	}
 }
