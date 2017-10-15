@@ -52,10 +52,6 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\_Complete-Game\MobileInput\Scripts\Editor\CrossPlatformInputInitialize.cs" />
-     <Compile Include="Assets\DarkTonic\Editor\UndoHelper.cs" />
-     <Compile Include="Assets\DarkTonic\PoolBoss\Editor\DTPoolBossInspectorUtility.cs" />
-     <Compile Include="Assets\DarkTonic\PoolBoss\Editor\PoolBossInspector.cs" />
-     <Compile Include="Assets\DarkTonic\PoolBoss\Editor\PoolBossInspectorResources.cs" />
      <Compile Include="Assets\PostProcessing\Editor\Attributes\PostProcessingModelEditorAttribute.cs" />
      <Compile Include="Assets\PostProcessing\Editor\Models\AmbientOcclusionModelEditor.cs" />
      <Compile Include="Assets\PostProcessing\Editor\Models\AntialiasingModelEditor.cs" />
@@ -126,7 +122,6 @@
      <None Include="Assets\PostProcessing\Resources\Shaders\DiskKernels.cginc" />
      <None Include="Assets\PostProcessing\Resources\Shaders\DepthOfField.cginc" />
      <None Include="Assets\PostProcessing\Resources\Shaders\ScreenSpaceRaytrace.cginc" />
-     <None Include="Assets\DarkTonic\PoolBoss\ReleaseNotes.txt" />
      <None Include="Assets\PostProcessing\Resources\Shaders\Bloom.shader" />
      <None Include="Assets\PostProcessing\Editor Resources\Monitors\VectorscopeRender.shader" />
      <None Include="Assets\PostProcessing\Resources\Shaders\EyeAdaptation.shader" />

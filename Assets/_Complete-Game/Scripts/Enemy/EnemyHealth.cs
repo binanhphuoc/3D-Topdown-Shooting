@@ -14,7 +14,7 @@ namespace CompleteProject
 
         Animator anim;                              // Reference to the animator.
         AudioSource enemyAudio;                     // Reference to the audio source.
-        ParticleSystem hitParticles;                // Reference to the particle system that plays when the enemy is damaged.
+        //ParticleSystem hitParticles;                // Reference to the particle system that plays when the enemy is damaged.
         CapsuleCollider capsuleCollider;            // Reference to the capsule collider.
 		TrailRenderer trail;
         bool isDead;                                // Whether the enemy is dead.
@@ -27,7 +27,7 @@ namespace CompleteProject
             // Setting up the references.
             anim = GetComponent <Animator> ();
             enemyAudio = GetComponent <AudioSource> ();
-            hitParticles = GetComponentInChildren <ParticleSystem> ();
+            //hitParticles = GetComponentInChildren <ParticleSystem> ();
             capsuleCollider = GetComponent <CapsuleCollider> ();
 
             // Setting the current health when the enemy first spawns.
@@ -72,7 +72,7 @@ namespace CompleteProject
         }
 
 
-        public void TakeDamage (int amount, Vector3 hitPoint)
+		public void TakeDamage (int amount, Vector3 hitPoint)
         {
             // If the enemy is dead...
             if(isDead)
@@ -84,12 +84,21 @@ namespace CompleteProject
 
             // Reduce the current health by the amount of damage sustained.
             currentHealth -= amount;
-            
-            // Set the position of the particle system to where the hit was sustained.
-            hitParticles.transform.position = hitPoint;
 
-            // And play the particles.
-            hitParticles.Play();
+			// Set the position of the particle system to where the hit was sustained.
+			GameObject hitParticles = ObjectPooler.SharedInstance.GetPooledObject(poolEntity.HIT, hitPoint, gameObject.transform.rotation);
+
+
+			if (hitParticles != null)
+			{
+				ObjectPooler.SharedInstance.setActive(hitParticles, true);
+
+				//hitParticles.transform.position = hitPoint;
+
+				// And play the particles.
+				hitParticles.GetComponent<ParticleSystem>().Play();
+				ObjectPooler.SharedInstance.destroyObject(hitParticles, 0.2f);
+			}
 
             // If the current health is less than or equal to zero...
             if(currentHealth <= 0)
