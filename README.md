@@ -15,7 +15,7 @@ Items are spawn randomly in the Game Map
 - Heart: Add 50 health for the player
 - Poisonous Mushroom: Player moves reversely
 
-## Specification
+## Specifications
 - Implementation using C# and Unity
 - iPhone 6 (or higher) with iOS 7 (or above), Android 7.0 (or above)
 
